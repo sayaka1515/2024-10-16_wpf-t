@@ -1,5 +1,4 @@
-﻿
-using System.Numerics;
+﻿using System.Numerics;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -18,6 +17,7 @@ namespace wpf001
     /// </summary>
     public partial class MainWindow : Window
     {
+        // 定義飲料品項及其價格
         Dictionary<string, int> drinks = new Dictionary<string, int>
         {
             { "紅茶大杯", 60 },
@@ -30,8 +30,11 @@ namespace wpf001
             { "咖啡小杯", 50 }
         };
 
+        // 定義訂單內容
         Dictionary<string, int> orders = new Dictionary<string, int>();
+        // 定義外帶選項
         string takeout = "";
+
         public MainWindow()
         {
             InitializeComponent();
@@ -40,12 +43,14 @@ namespace wpf001
             DisplayDrinkMenu(drinks);
         }
 
+        // 顯示飲料品項的方法
         private void DisplayDrinkMenu(Dictionary<string, int> drinks)
         {
-            //stackpanel_DrinkMenu.Children.Clear();
+            // 設定 stackpanel_DrinkMenu 的高度
             stackpanel_DrinkMenu.Height = 42 * drinks.Count;
             foreach (var drink in drinks)
             {
+                // 建立 StackPanel
                 var sp = new StackPanel
                 {
                     Orientation = Orientation.Horizontal,
@@ -54,6 +59,7 @@ namespace wpf001
                     Height = 35,
                 };
 
+                // 建立 CheckBox
                 var cb = new CheckBox
                 {
                     Content = drink.Key,
@@ -66,6 +72,7 @@ namespace wpf001
                     VerticalContentAlignment = VerticalAlignment.Center,
                 };
 
+                // 建立 Label 顯示價格
                 var lb_price = new Label
                 {
                     Content = $"{drink.Value}元",
@@ -77,6 +84,7 @@ namespace wpf001
                     VerticalContentAlignment = VerticalAlignment.Center,
                 };
 
+                // 建立 Slider
                 var sl = new Slider
                 {
                     Width = 150,
@@ -88,6 +96,7 @@ namespace wpf001
                     IsSnapToTickEnabled = true,
                 };
 
+                // 建立 Label 顯示數量
                 var lb_amount = new Label
                 {
                     Content = "0",
@@ -99,33 +108,37 @@ namespace wpf001
                     Width = 50,
                 };
 
+                // 綁定 Slider 的值到 Label
                 Binding myBinding = new Binding("Value");
                 myBinding.Source = sl;
                 lb_amount.SetBinding(ContentProperty, myBinding);
 
+                // 將控制項添加到 StackPanel
                 sp.Children.Add(cb);
                 sp.Children.Add(lb_price);
                 sp.Children.Add(sl);
                 sp.Children.Add(lb_amount);
 
+                // 將 StackPanel 添加到 stackpanel_DrinkMenu
                 stackpanel_DrinkMenu.Children.Add(sp);
             }
-
         }
 
+        // 處理 RadioButton 的 Checked 事件
         private void RadioButton_Checked(object sender, RoutedEventArgs e)
         {
             var rb = sender as RadioButton;
             if (rb.IsChecked == true)
             {
-                //MessageBox.Show(rb.Content.ToString());
+                // 設定外帶選項
                 takeout = rb.Content.ToString();
             }
         }
 
+        // 處理訂單按鈕的點擊事件
         private void OrderButton_Click(object sender, RoutedEventArgs e)
         {
-            //確認訂購內容
+            // 確認訂購內容
             orders.Clear();
             for (int i = 0; i < stackpanel_DrinkMenu.Children.Count; i++)
             {
@@ -135,10 +148,11 @@ namespace wpf001
                 var sl = sp.Children[2] as Slider;
                 var amount = (int)sl.Value;
 
+                // 如果選中且數量大於0，添加到訂單
                 if (cb.IsChecked == true && amount > 0) orders.Add(drinkName, amount);
             }
 
-            //顯示訂購內容
+            // 顯示訂購內容
             string msg = "";
             string discount_msg;
             int total = 0;
@@ -170,6 +184,7 @@ namespace wpf001
             }
             msg += $"\n{discount_msg}，原價為{total}元，售價為 {sellPrice}元。";
 
+            // 顯示結果
             ResultTextBlock.Text = msg;
         }
     }

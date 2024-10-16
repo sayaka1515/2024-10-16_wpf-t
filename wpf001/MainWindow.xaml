@@ -7,13 +7,28 @@
         mc:Ignorable="d"
         Title="飲料點餐系統ver3" Height="540" Width="715">
     <Grid>
-        <StackPanel x:Name="stackpanel_DrinkMenu" Margin="20,65,0,0" Background="#FFF9EEEE" Height="200" VerticalAlignment="Top" HorizontalAlignment="Left" Width="455" />
-        <Button x:Name="OrderButton" Content="確定訂購" Margin="0,25,30,0" VerticalAlignment="Top" Height="60" FontSize="18" FontWeight="Bold" HorizontalAlignment="Right" Width="100" Click="OrderButton_Click"/>
-        <TextBlock x:Name="ResultTextBlock" Margin="20,0,30,35" TextWrapping="Wrap" Background="#FFF7F3D4" Height="205" VerticalAlignment="Bottom"/>
-        <GroupBox Header="內用/外帶" Margin="20,0,0,0" Background="#FFB4F4F3" Height="52" VerticalAlignment="Top" HorizontalAlignment="Left" Width="455">
+        <!-- 飲料選單的 StackPanel -->
+        <StackPanel x:Name="stackpanel_DrinkMenu" Margin="20,65,0,0" Background="#FFF9EEEE" Height="200" VerticalAlignment="Top"
+                    HorizontalAlignment="Left" Width="455" />
+
+        <!-- 確定訂購按鈕 -->
+        <Button x:Name="OrderButton" Content="確定訂購" Margin="0,25,30,0" VerticalAlignment="Top" Height="60" FontSize="18" 
+                FontWeight="Bold" HorizontalAlignment="Right" Width="100" Click="OrderButton_Click"/>
+
+        <!-- 顯示訂單結果的 TextBlock -->
+        <TextBlock x:Name="ResultTextBlock" Margin="20,0,30,35" TextWrapping="Wrap" Background="#FFF7F3D4" Height="205"
+                   VerticalAlignment="Bottom"/>
+
+        <!-- 內用/外帶選項的 GroupBox -->
+        <GroupBox Header="內用/外帶" Margin="20,0,0,0" Background="#FFB4F4F3" Height="52" VerticalAlignment="Top"
+                  HorizontalAlignment="Left" Width="455">
             <StackPanel Orientation="Horizontal" Height="30">
-                <RadioButton Content="內用" FontSize="16" FontWeight="Bold" Height="25" Width="80" Margin="10,0,0,0" VerticalAlignment="Center" VerticalContentAlignment="Center" Checked="RadioButton_Checked"/>
-                <RadioButton Content="外帶" FontSize="16" FontWeight="Bold" Height="25" Width="80" Margin="10,0,0,0" VerticalAlignment="Center" VerticalContentAlignment="Center" Checked="RadioButton_Checked"/>
+                <!-- 內用選項的 RadioButton -->
+                <RadioButton Content="內用" FontSize="16" FontWeight="Bold" Height="25" Width="80" Margin="10,0,0,0" 
+                             VerticalAlignment="Center" VerticalContentAlignment="Center" Checked="RadioButton_Checked"/>
+                <!-- 外帶選項的 RadioButton -->
+                <RadioButton Content="外帶" FontSize="16" FontWeight="Bold" Height="25" Width="80" Margin="10,0,0,0" 
+                             VerticalAlignment="Center" VerticalContentAlignment="Center" Checked="RadioButton_Checked"/>
             </StackPanel>
         </GroupBox>
     </Grid>
